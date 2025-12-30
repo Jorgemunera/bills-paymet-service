@@ -3,36 +3,13 @@
 import uvicorn
 
 from src.config.settings import get_settings
-from src.container import get_container
 from src.shared.infrastructure.http.server import create_app
 from src.shared.utils.logger import Logger
 
 logger = Logger("MAIN")
 
-
-def create_application():
-    """
-    Create and configure the FastAPI application.
-
-    Returns:
-        Configured FastAPI application
-    """
-    # Initialize container
-    container = get_container()
-    container.initialize()
-
-    # Create FastAPI app
-    app = create_app(
-        sqlite_connection=container.sqlite_connection,
-        redis_client=container.redis_client,
-        payment_routes=container.payment_routes,
-    )
-
-    return app
-
-
 # Create application instance
-app = create_application()
+app = create_app()
 
 
 if __name__ == "__main__":

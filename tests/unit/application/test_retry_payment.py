@@ -2,6 +2,7 @@
 
 import pytest
 from decimal import Decimal
+from datetime import datetime
 
 from src.modules.payments.application.use_cases.retry_payment import RetryPaymentUseCase
 from src.modules.payments.application.dtos import RetryPaymentRequest
@@ -90,13 +91,9 @@ class TestRetryPaymentUseCase:
             currency="MXN",
             status=PaymentStatus.FAILED,
             retries=2,
-            created_at=failed_payment.created_at if 'failed_payment' in dir() else None,
-            updated_at=failed_payment.updated_at if 'failed_payment' in dir() else None,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow(),
         )
-        # Fix: use actual datetime
-        from datetime import datetime
-        payment._created_at = datetime.utcnow()
-        payment._updated_at = datetime.utcnow()
 
         mock_payment_repository.find_by_id.return_value = payment
         mock_payment_processor.process_retry.return_value = ProcessingResult(

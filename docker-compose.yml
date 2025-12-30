@@ -4,7 +4,7 @@ services:
   # Redis - Cache and Idempotency
   redis:
     image: redis:7-alpine
-    container_name: payments-redis
+    container_name: payment-redis
     ports:
       - "6379:6379"
     volumes:

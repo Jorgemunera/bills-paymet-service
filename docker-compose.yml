@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: payments-api
+    container_name: payment-api
     ports:
       - "8000:8000"
     environment:

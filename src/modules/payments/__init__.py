@@ -1,0 +1,1 @@
+"""Payments module - handles payment processing and management."""
